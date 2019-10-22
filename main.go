@@ -14,6 +14,7 @@ import (
 	"github.com/urfave/cli"
 )
 
+const version = "0.1.1"
 const dateLayout = "2006-01-02 15:04:05"
 const sleepTime = 3000
 
@@ -254,6 +255,7 @@ func main() {
 
 	app.Name = "gle"
 	app.Usage = "logentries cli tool"
+	app.Version = version
 
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
