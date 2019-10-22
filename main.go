@@ -380,9 +380,11 @@ func run(cmd *command) error {
 		return err
 	}
 
-	url := pqr.Links[0].Href
-
-	cmd.handleLogs(url)
+	links := pqr.Links
+	if len(links) > 0 {
+		url := links[0].Href
+		cmd.handleLogs(url)
+	}
 
 	return nil
 }
