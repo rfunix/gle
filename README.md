@@ -1,4 +1,4 @@
-# gle - The logentries log watcher written in Go.
+# gle - The logentries log search written in Go.
 
 gle is very simple script written in Go to analyze logentries logs.
 
