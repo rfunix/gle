@@ -16,7 +16,7 @@ import (
 
 const version = "0.1.1"
 const dateLayout = "2006-01-02 15:04:05"
-const sleepTime = 3000
+const sleepTime = 1000
 
 func convertDateToUnixTimestamp(d string) (int64, error) {
 	t, error := time.Parse(dateLayout, d)
