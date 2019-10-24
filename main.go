@@ -9,14 +9,19 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
+	"github.com/cyucelen/marker"
+	"github.com/fatih/color"
 	"github.com/urfave/cli"
 )
 
 const version = "0.1.3"
 const dateLayout = "2006-01-02 15:04:05"
 const sleepTime = 1000
+
+var blueFg = color.New(color.FgBlue)
 
 func convertDateToUnixTimestamp(d string) (int64, error) {
 	t, error := time.Parse(dateLayout, d)
@@ -248,6 +253,12 @@ func NewPostQueryRequest(logID, statement string, from, to int64) *PostQueryRequ
 	return pqr
 }
 
+func getQueryArgument(query string) string {
+	opening := strings.Index(query, "(")
+	closure := strings.Index(query, ")")
+	return query[opening+1 : closure]
+}
+
 func main() {
 	cmd := command{}
 
@@ -335,8 +346,11 @@ func (cmd *command) handleLogs(url string) {
 			log.Fatal(err)
 		}
 
+		queryArgument := getQueryArgument(cmd.query)
+
 		for _, m := range d.(*getQueryResponse).Events {
-			fmt.Println(m.Message)
+			highlightedMessage := marker.Mark(m.Message, marker.MatchAll(queryArgument), blueFg)
+			fmt.Println(highlightedMessage)
 		}
 
 		links := d.(*getQueryResponse).Links
