@@ -17,7 +17,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-const version = "0.1.3"
+const version = "0.2.0"
 const dateLayout = "2006-01-02 15:04:05"
 const sleepTime = 1000
 
